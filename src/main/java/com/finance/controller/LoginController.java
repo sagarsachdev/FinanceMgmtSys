@@ -35,6 +35,8 @@ public class LoginController {
   @Autowired
   PurchaseService purchaseService;
   
+  static final int GOLD_VALUE = 40000;
+  static final int TITANIUM_VLAUE = 80000;
   /**
    * 
    * @return mav : returns ModelAndView object
@@ -64,6 +66,7 @@ public class LoginController {
   @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
   public ModelAndView loginProcess(@ModelAttribute("login") Login login, HttpServletRequest request) {
     ModelAndView mav = null;
+    int cardValue = 0;
     String password = MD5.getMd5(login.getPassword());
     login.setPassword(MD5.getMd5(password));
     User user = userService.validateUser(login);
@@ -73,7 +76,8 @@ public class LoginController {
 	    List<User> lst = adminService.getUsrByUname(uname);
 	    List<Card> card = cardService.getCardByName(uname);
 	    List<Purchase> purchase = purchaseService.getPurchaseById(lst.get(0).getId());
-	    
+	    cardValue = lst.get(0).getCard().equals("gold") ? GOLD_VALUE : TITANIUM_VLAUE;
+	    mav.addObject("cardValue",cardValue);
 	    mav.addObject("purchaseList",purchase);
 	    mav.addObject("card",card.get(0));
 	    mav.addObject("verify",lst.get(0));

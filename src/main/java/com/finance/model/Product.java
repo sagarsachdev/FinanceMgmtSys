@@ -5,6 +5,13 @@ public class Product {
 	private String productName;
 	private String productDetails;
 	private double Cost;
+	private String image;
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
 	public int getProductId() {
 		return productId;
 	}

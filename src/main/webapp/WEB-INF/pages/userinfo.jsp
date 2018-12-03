@@ -6,14 +6,14 @@
 <html>
 <head>
 <style type="text/css">
-      
+		body{
+			background-color: #e3e3e3;
+		}
       th{
          color:#801525;
          padding: 10px;
-         background-color: #44C5FC;
       }
       td{
-         background-color: #44FAFC ;
          color:black;
       }
 </style>
@@ -22,8 +22,8 @@
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/style.css"/>">
 </head>
 <body>
-	<br><br><center>	<h1 style="font-size:40px;text-shadow:0 0 3px #FF0000, 2px 2px 4px red;">User List</h1></center><br><br>
-<div align="center">
+	<div align="center">
+	<br>	<h1 style="font-size:40px;">User List</h1><br>
 	<c:if test="${requestScope.usrList !=null and
  	not empty requestScope.usrList}">
 	<table border="2" width="200px" cellpadding="5">  
@@ -61,5 +61,6 @@
    </c:forEach>  
    </table>  
    </c:if>
+   </div>
 </body>
 </html>

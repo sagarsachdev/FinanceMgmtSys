@@ -7,10 +7,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Product</title>
+<style>
+	.grid-container {
+		display: grid;
+		grid-template-columns: auto auto;
+		margin-left: 200px;
+		margin-right: 200px;
+		}
+</style>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>">
+<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">	
 </head>
-<body>
+<body style="background-color: #e3e3e3">
 
-	<%
+		<%
       	if(session.getAttribute("verify") == null){
       		response.sendRedirect("login");
       	}
@@ -26,26 +36,27 @@
 
 <div>
 <div>
-<h1>Hi, ${verify.uname}</h1>
+<h4 align="right">Hi, ${verify.uname}</h4>
+<h4 align="right"><a href="logout">Logout</a></h4>
 </div>
-<div>
-<a href="logout">Logout</a>
+
 </div>
-</div>
-<h1>Product List</h1> 
+<h1 align="center">Product List</h1> 
 <br>
- 
+ 	<div class="grid-container">
    <c:forEach var="Product" items="${list}">   
-    <img src="https://via.placeholder.com/150"><br>
-  		Product Name: ${Product.productName}  
+   <div class="grid-item">
+    <img src="<c:url value="${Product.image}"/>"style="width:200px;height:200px;"><br>
+    </div>
+    <div class="grid-item">
+  		<b>Product Name:</b> ${Product.productName}  
    <br>
-  		Product Details: ${Product.productDetails}  
+  		<b>Product Details:</b> ${Product.productDetails}  
    <br>
-  		Cost: ${Product.cost}  
+  		<b>Cost:</b> ${Product.cost}  
        <br><br><form action="searchpro/${Product.productId}"><input type="Submit" value="Buy Now"><br><br><br></form>
+       </div>
    </c:forEach>  
-    
-
-
+   </div>
 </body>
 </html>

@@ -25,6 +25,28 @@
 	font-size:15px;
 }
 
+ul {
+    list-style-type: none;
+    border : 4px solid white;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+
 button {
   border: none;
   width: 152px;

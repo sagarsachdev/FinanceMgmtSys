@@ -26,9 +26,10 @@
 				<li class="omega"><a href="Terms.html"><span><span>T&C</span></span></a></li>
 			</ul>
 		</nav>
+	</header>
 		<div class="wrapper">
 			<div class="text">
-				<span class="text1">Effective<span>products buying solution with no cost EMI</span></span>
+				<span class="text1">Effective<span>Products buying solution with No Cost EMI</span></span>
 			</div>
 		</div>
 	<!-- </header><div class="ic">More Website Templates at TemplateMonster.com!</div> -->

@@ -23,6 +23,7 @@
   <div class="container">
     <form action="registerProcess" method="post">
       <div class="row">
+      	<h1 align="center">Registration Form</h1>
         <h4>User details</h4>
         <div class="input-group input-group-icon"> 
           <input type="text" name="name" placeholder="Full Name" pattern="^[a-zA-Z]+$" maxlength="20" required />

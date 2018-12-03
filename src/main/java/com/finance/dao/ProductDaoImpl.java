@@ -35,7 +35,8 @@ public List<Product> getProducts(){
             p.setProductId(rs.getInt(1));  
             p.setProductName(rs.getString(2));  
             p.setProductDetails(rs.getString(3));  
-            p.setCost(rs.getDouble(4));  
+            p.setCost(rs.getDouble(4)); 
+            p.setImage(rs.getString(5));
             return p;  
         }  
     });  
@@ -57,6 +58,7 @@ public List<Product> getCategoryProducts(int id){
 	            p.setProductName(rs.getString(2));  
 	            p.setProductDetails(rs.getString(3));  
 	            p.setCost(rs.getDouble(4)); 
+	            p.setImage(rs.getString(5));
 				list.add(p);  
 			}  
 			return list;  
