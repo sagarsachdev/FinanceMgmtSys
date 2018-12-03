@@ -61,7 +61,6 @@ public class ProductController {
         session.getAttribute("verify");
         return mv; 
     }
-    
     @RequestMapping("/purchase")
     public ModelAndView purchase(HttpServletRequest request) {
     	Purchase p = new Purchase();

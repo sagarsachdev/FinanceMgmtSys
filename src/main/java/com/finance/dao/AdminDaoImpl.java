@@ -22,10 +22,10 @@ public class AdminDaoImpl implements AdminDao {
 	  
 	  public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
-	}
-	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
-	}
+		}
+		public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+			this.jdbcTemplate = jdbcTemplate;
+		}
 	
 	/**
 	 @return list:The list of all the users registered
