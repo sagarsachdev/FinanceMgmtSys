@@ -21,7 +21,7 @@
    
    <body>
 
-      <h1>Ooooopps...</h1>
+      <h1 style="color: red;"><i class="fas fa-frown"></i> Ooooopps...</h1>
       <h3>An Error Occured</h3>
       
   <table width = "100%" border = "1" cellpadding="4">

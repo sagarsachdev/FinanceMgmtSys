@@ -20,7 +20,11 @@ import com.finance.service.CardService;
 import com.finance.service.ProductService;
 import com.finance.service.PurchaseService;
 
-
+/**
+ * 
+ * @author SmartBiz
+ * 
+ */
 @Controller
 public class ProductController {
     @Autowired  
@@ -37,60 +41,84 @@ public class ProductController {
     
     /**
      * 
-     * @return list
+     * @return mv : It returns view after completing the process defined in method
      */
     @RequestMapping("/viewproduct1")  
     public ModelAndView viewproduct(){  
-       List<Product> list=productService.getProducts();   
-       return new ModelAndView("viewproduct","list",list);  
+       ModelAndView mv;
+	try {
+		List<Product> list=productService.getProducts();   
+		   mv = new ModelAndView("viewproduct","list",list);
+	} catch (Exception e) {
+		mv = new ModelAndView("error","message",e);
+	} 
+       return mv;
     }
     
     /**
-     * @param productId
-     * @return object mv
+     * 
+     * @param request : Uses request to initiate the session
+     * @param productId : Accepts productId in order to retrieve the product details of particular product
+     * @return mv : It returns view after completing the process defined in method
      */
     @RequestMapping(value="/searchpro/{productId}")  
     public ModelAndView edit(HttpServletRequest request,@PathVariable int productId){  
-        List<Product> p=productService.getCategoryProducts(productId);   
-        List<com.finance.model.Period> list=productService.getPeriod1();
-        Product n = p.get(0);
-        ModelAndView mv=new ModelAndView("productdetails");
-        mv.addObject("command1",n);
-        mv.addObject("command",list);
-        HttpSession session = request.getSession();
-        session.getAttribute("verify");
+        ModelAndView mv;
+		try {
+			List<Product> p=productService.getCategoryProducts(productId);   
+			List<com.finance.model.Period> list=productService.getPeriod1();
+			Product n = p.get(0);
+			mv = new ModelAndView("productdetails");
+			mv.addObject("command1",n);
+			mv.addObject("command",list);
+			HttpSession session = request.getSession();
+			session.getAttribute("verify");
+		} catch (Exception e) {
+			mv = new ModelAndView("error","message",e);
+		}
         return mv; 
     }
+    
+    /**
+     * 
+     * @param request : Uses request to initiate the session
+     * @return mv : It returns view after completing the process defined in method
+     */
     @RequestMapping("/purchase")
     public ModelAndView purchase(HttpServletRequest request) {
-    	Purchase p = new Purchase();
-    	int id = Integer.parseInt(request.getParameter("id"));
-    	p.setId(id);
-    	p.setPeriod(Integer.parseInt(request.getParameter("period")));
-    	p.setProductId(Integer.parseInt(request.getParameter("productId")));
-    	p.setCost(Float.parseFloat(request.getParameter("cost")));
-    	List<User> users = adminService.getUsrById(id);
-    	User user = users.get(0);
-    	List<Card> cards = cardService.getCardByName(users.get(0).getUname());
-    	Card card = cards.get(0);
-    	int j=0;
-    	ModelAndView mv = null;
-    	if(user.getVerified().equals("yes")) {
-    		if((card.getValue() - p.getCost()) >= 0) {
-    			j = purchaseService.updateCard(card, user, p);
-    		}else {
-    			mv = new ModelAndView("failure");
-    		}
-    		if(j>0)
-    		{
-    			int i = purchaseService.purchaseDetails(p);
-    			mv = new ModelAndView("success");
-    		}else {
-    			mv = new ModelAndView("failure");
-    		}
-    	}else {
-    		mv = new ModelAndView("fail");
-    	}
+    	ModelAndView mv;
+		try {
+			Purchase p = new Purchase();
+			int id = Integer.parseInt(request.getParameter("id"));
+			p.setId(id);
+			p.setPeriod(Integer.parseInt(request.getParameter("period")));
+			p.setProductId(Integer.parseInt(request.getParameter("productId")));
+			p.setCost(Float.parseFloat(request.getParameter("cost")));
+			List<User> users = adminService.getUsrById(id);
+			User user = users.get(0);
+			List<Card> cards = cardService.getCardByName(users.get(0).getUname());
+			Card card = cards.get(0);
+			int j=0;
+			mv = null;
+			if(user.getVerified().equals("yes")) {
+				if((card.getValue() - p.getCost()) >= 0) {
+					j = purchaseService.updateCard(card, user, p);
+				}else {
+					mv = new ModelAndView("failure");
+				}
+				if(j>0)
+				{
+					int i = purchaseService.purchaseDetails(p);
+					mv = new ModelAndView("success");
+				}else {
+					mv = new ModelAndView("failure");
+				}
+			}else {
+				mv = new ModelAndView("fail");
+			}
+		} catch (NumberFormatException e) {
+			mv = new ModelAndView("error","message",e);
+		}
     	return mv;
     }
 }

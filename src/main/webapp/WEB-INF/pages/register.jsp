@@ -8,7 +8,11 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/class.css"/>">
 <style type="text/css">
-
+	.wrapper{max-width: 38em;
+  	margin: 0em auto;}
+	#logo {display:block;
+	background:url(resources/images/logo.gif) no-repeat;
+	width:245px;height:85px;text-indent:-5000px}
 	#verified {
 	display: none;
 }
@@ -20,6 +24,9 @@
 </head>
 
 <body>
+	<div class="wrapper">
+		<h1><a href="index.jsp" id="logo">Smart BIZ</a></h1>
+	</div>
   <div class="container">
     <form action="registerProcess" method="post">
       <div class="row">

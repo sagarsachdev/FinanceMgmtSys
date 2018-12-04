@@ -26,74 +26,103 @@ public class AdminController {
 	private int value;
 	
 	/**
-	 * @param request
-	 * @param l
-	 * @return object mv
-	 * @throws ServerException
-	 * @throws IOException
-	 * @throws ServletException
+	 * 
+	 * @param request : It is used to set some attribute
+	 * @param l : It is object of Login POJO class
+	 * @return mv : It returns view after completing the process defined in method
+	 * @throws ServerException : Used to throw server exception
+	 * @throws IOException : Used to throw IO exception
+	 * @throws ServletException : Used to throw Servlet exception
 	 */
 	@RequestMapping(value="/adminloginProcess", method = RequestMethod.POST)
 	  public ModelAndView adminloginProcess(HttpServletRequest request, @ModelAttribute Login l) throws ServerException,IOException, ServletException {
 		  ModelAndView mv = null;
-		  if(l.getUname().equals("admin") && l.getPassword().equals("admin")) {
-			  List<User> lst = new ArrayList<User>();
-				lst = adao.getAllUsers();
-				request.setAttribute("usrList",lst);
-			  mv = new ModelAndView("userinfo");
-		  }else {
-			  mv = new ModelAndView("adminlogin");
-			  mv.addObject("message", "Username or Password is wrong!!");
-		  }
+		  try {
+			if(l.getUname().equals("admin") && l.getPassword().equals("admin")) {
+				  List<User> lst = new ArrayList<User>();
+					lst = adao.getAllUsers();
+					request.setAttribute("usrList",lst);
+				  mv = new ModelAndView("userinfo");
+			  }else {
+				  mv = new ModelAndView("adminlogin");
+				  mv.addObject("message", "Username or Password is wrong!!");
+			  }
+		} catch (Exception e) {
+			mv = new ModelAndView("error","message",e);
+		}
 		  return mv;
 	  }
 	
 	/**
 	 * 
-	 * @param request
-	 * @return to userinfo page with lst
+	 * @param request : It is used to set some attribute
+	 * @return : It returns view after completing the process defined in method
 	 */
 	@RequestMapping("/userinfo")
 		public ModelAndView display(HttpServletRequest request) {
-		List<User> lst = new ArrayList<User>();
-		lst = adao.getAllUsers();
-		request.setAttribute("usrList",lst);
-			return new ModelAndView("userinfo");
+		ModelAndView mv;
+		try {
+			List<User> lst = new ArrayList<User>();
+			lst = adao.getAllUsers();
+			request.setAttribute("usrList",lst);
+			mv = new ModelAndView("userinfo");
+		} catch (Exception e) {
+			mv = new ModelAndView("error","message",e);
+		}
+		return mv;
 		}
 	 
 	/**
 	  * 
-	  * @param id
-	  * @return ModelAndView object and redirect to usreditform 
+	  * @param id : Accepts userId to edit user's profile
+	  * @return : It returns view after completing the process defined in method
 	  */
 	 @RequestMapping(value="/editusr/{id}")  
 	    public ModelAndView edit(@PathVariable int id){  
-		 	User u = new User();
-		 	u.setId(id);
-		 	value = u.getId();
-	        List<User> usr=adao.getUsrById(id);  
-	        return new ModelAndView("usreditform","command",usr.get(0));  
+		 	ModelAndView mv;
+			try {
+				User u = new User();
+				u.setId(id);
+				value = u.getId();
+				List<User> usr=adao.getUsrById(id);  
+				mv = new ModelAndView("usreditform","command",usr.get(0));
+			} catch (Exception e) {
+				mv = new ModelAndView("error","message",e);
+			}  
+	        return mv;
 	    }  
 	 
 	 /**
 	  * 
-	  * @param usr
-	  * @return ModelAndView object
+	  * @param usr : Accepts user object to set attributes in POJO class
+	  * @return : It returns view after completing the process defined in method
 	  */
 	 @RequestMapping(value="/editsave",method = RequestMethod.POST)  
 	    public ModelAndView editsave(@ModelAttribute("usr") User usr){  
-		 	usr.setId(value);
-	        adao.updateUser(usr);  
-	        return new ModelAndView("redirect:/userinfo");  
+		 	ModelAndView mv;
+			try {
+				usr.setId(value);
+				adao.updateUser(usr);  
+				mv = new ModelAndView("redirect:/userinfo");
+			} catch (Exception e) {
+				mv = new ModelAndView("error","message",e);
+			}  
+	        return mv;
 	    }  
 	 
 	 /**
-	  * @param id
-	  * @return ModelAndView object
+	  * @param id : Accepts userId in order to delete user's account
+	  * @return : It returns view after completing the process defined in method
 	  */
 	 @RequestMapping(value="/deleteusr/{id}",method = RequestMethod.GET)  
 	    public ModelAndView delete(@PathVariable int id){  
-	        adao.delete(id);  
-	        return new ModelAndView("redirect:/userinfo");  
+	        ModelAndView mv;
+			try {
+				adao.delete(id);  
+				mv = new ModelAndView("redirect:/userinfo");
+			} catch (Exception e) {
+				mv = new ModelAndView("error","message",e);
+			}  
+	        return mv;
 	    }  
 }
