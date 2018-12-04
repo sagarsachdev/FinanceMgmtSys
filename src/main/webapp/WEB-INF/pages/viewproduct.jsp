@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/nav.css"/>">
 <title>Product</title>
 <style>
 	.grid-container {
@@ -18,27 +19,13 @@
 			margin-left: 200px;
 			margin-right: 200px;	
 		}
-		 ul {
-	    list-style-type: none;
-	    border : 4px solid white;
-	    margin: 0;
-	    padding: 0;
-	    overflow: hidden;
-	    background-color: #333;
-		}
-		
-		li {
-		    float: left;
-		}
-		
-		li a {
-		    display: block;
-		    color: white;
-		    text-align: center;
-		    padding: 14px 16px;
-		    text-decoration: none;
-		}
 </style>
+<script type="text/javascript">
+		history.pushState(null,null,location.href);
+		window.onpopstate = function(){
+			history.go(1);
+		};
+	</script>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>">
 </head>
 <body style="background-color: #e3e3e3">
@@ -59,7 +46,7 @@
 <center>
 <div id="div2" style = "height:100%;">
 	<ul>	
-		<li><a href="#">Hi, ${verify.uname}</a></li>
+		<li><a href="loginProcess">Hi, ${verify.uname}</a></li>
 		<li style="float:right"><a href="logout">Logout</a></li>
 		<li style="float:right"><a href="changePassword">Change Password</a></li>
 	</ul>

@@ -7,6 +7,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/nav.css"/>">
 <style type="text/css">
 	#div1 {
     	background-image: url("resources/images/card-background.jpg");
@@ -25,27 +26,13 @@
       td{
          color:black;
       }
-      ul {
-    list-style-type: none;
-    border : 4px solid white;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-	}
-	
-	li {
-	    float: left;
-	}
-	
-	li a {
-	    display: block;
-	    color: white;
-	    text-align: center;
-	    padding: 14px 16px;
-	    text-decoration: none;
-	}
 </style>
+<script type="text/javascript">
+		history.pushState(null,null,location.href);
+		window.onpopstate = function(){
+			history.go(1);
+		};
+	</script>
 </head>
 <body>
 

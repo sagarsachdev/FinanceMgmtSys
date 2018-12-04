@@ -13,7 +13,11 @@ import org.springframework.jdbc.core.RowMapper;
 import com.finance.model.Period;
 import com.finance.model.Product;
 
-  
+/**
+ * 
+ * @author Group 9
+ *
+ */
 public class ProductDaoImpl implements ProductDao{  
 	@Autowired
 	JdbcTemplate jdbcTemplate;

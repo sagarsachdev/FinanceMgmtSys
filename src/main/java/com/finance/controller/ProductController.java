@@ -22,81 +22,73 @@ import com.finance.service.PurchaseService;
 
 /**
  * 
- * @author SmartBiz
+ * @author Group 9
  * 
  */
 @Controller
 public class ProductController {
-    @Autowired  
-    ProductService productService;  
-    
-    @Autowired
-    PurchaseService purchaseService;
-    
-    @Autowired
-    AdminService adminService;
-    
-    @Autowired
-    CardService cardService;
-    
-    /**
-     * 
-     * @return mv : It returns view after completing the process defined in method
-     */
-    @RequestMapping("/viewproduct1")  
-    public ModelAndView viewproduct(){  
-       ModelAndView mv;
-	try {
+	@Autowired  
+	ProductService productService;  
+	@Autowired
+	PurchaseService purchaseService;
+	@Autowired
+	AdminService adminService;
+	@Autowired
+	CardService cardService;
+
+	/**
+	 * 
+	 * @return mv : It returns view after completing the process defined in method
+	 */
+	@RequestMapping("/viewproduct1")  
+	public ModelAndView viewproduct(){  
+		ModelAndView mv;
 		List<Product> list=productService.getProducts();   
-		   mv = new ModelAndView("viewproduct","list",list);
-	} catch (Exception e) {
-		mv = new ModelAndView("error","message",e);
-	} 
-       return mv;
-    }
-    
-    /**
-     * 
-     * @param request : Uses request to initiate the session
-     * @param productId : Accepts productId in order to retrieve the product details of particular product
-     * @return mv : It returns view after completing the process defined in method
-     */
-    @RequestMapping(value="/searchpro/{productId}")  
-    public ModelAndView edit(HttpServletRequest request,@PathVariable int productId){  
-        ModelAndView mv;
+		mv = new ModelAndView("viewproduct","list",list);
+		return mv;
+	}
+
+	/**
+	 * 
+	 * @param request : Uses request to initiate the session
+	 * @param productId : Accepts productId in order to retrieve the product details of particular product
+	 * @return mv : It returns view after completing the process defined in method
+	 */
+	@RequestMapping(value="/searchpro/{productId}")  
+	public ModelAndView edit(HttpServletRequest request,@PathVariable int productId){  
+		ModelAndView mv;
+		List<Product> p=productService.getCategoryProducts(productId);   
+		List<com.finance.model.Period> list=productService.getPeriod1();
+		Product n = p.get(0);
+		mv = new ModelAndView("productdetails");
+		mv.addObject("command1",n);
+		mv.addObject("command",list);
+		HttpSession session = request.getSession();
+		session.getAttribute("verify");
+		return mv; 
+	}
+
+	/**
+	 * 
+	 * @param request : Uses request to initiate the session
+	 * @return mv : It returns view after completing the process defined in method
+	 */
+	@RequestMapping("/purchase")
+	public ModelAndView purchase(HttpServletRequest request) {
+		ModelAndView mv;
+		Purchase p = new Purchase();
+		int id = Integer.parseInt(request.getParameter("id"));
+		p.setId(id);
 		try {
-			List<Product> p=productService.getCategoryProducts(productId);   
-			List<com.finance.model.Period> list=productService.getPeriod1();
-			Product n = p.get(0);
-			mv = new ModelAndView("productdetails");
-			mv.addObject("command1",n);
-			mv.addObject("command",list);
-			HttpSession session = request.getSession();
-			session.getAttribute("verify");
-		} catch (Exception e) {
+			p.setPeriod(Integer.parseInt(request.getParameter("period")));
+		} catch (NumberFormatException e) {
 			mv = new ModelAndView("error","message",e);
 		}
-        return mv; 
-    }
-    
-    /**
-     * 
-     * @param request : Uses request to initiate the session
-     * @return mv : It returns view after completing the process defined in method
-     */
-    @RequestMapping("/purchase")
-    public ModelAndView purchase(HttpServletRequest request) {
-    	ModelAndView mv;
-		try {
-			Purchase p = new Purchase();
-			int id = Integer.parseInt(request.getParameter("id"));
-			p.setId(id);
-			p.setPeriod(Integer.parseInt(request.getParameter("period")));
-			p.setProductId(Integer.parseInt(request.getParameter("productId")));
-			p.setCost(Float.parseFloat(request.getParameter("cost")));
+		p.setProductId(Integer.parseInt(request.getParameter("productId")));
+		p.setCost(Float.parseFloat(request.getParameter("cost")));
 			List<User> users = adminService.getUsrById(id);
-			User user = users.get(0);
 			List<Card> cards = cardService.getCardByName(users.get(0).getUname());
+			User user = users.get(0);
 			Card card = cards.get(0);
 			int j=0;
 			mv = null;
@@ -116,10 +108,7 @@ public class ProductController {
 			}else {
 				mv = new ModelAndView("fail");
 			}
-		} catch (NumberFormatException e) {
-			mv = new ModelAndView("error","message",e);
-		}
-    	return mv;
-    }
+		return mv;
+	}
 }
 

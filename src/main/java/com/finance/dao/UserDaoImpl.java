@@ -64,6 +64,10 @@ public User validateUser(Login login) {
   	}
   }
   
+  /**
+   * @param login : Accepts login object for updating the user's password
+   * return : returns positive integer value if query is successfully executed
+   */
   public int update(Login login){  
 	    String sql="update gr1_users set gu_password = '" + login.getPassword() + "' where gu_uname = '"+ login.getUname() + "'";  
 	    return jdbcTemplate.update(sql);  

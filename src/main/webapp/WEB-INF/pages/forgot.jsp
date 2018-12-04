@@ -11,6 +11,7 @@
 <title>Login</title>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/util.css"/>">
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/nav.css"/>">
 <link rel="stylesheet" href="<c:url value= "https://use.fontawesome.com/releases/v5.5.0/css/all.css"/>" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,6 +22,9 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-50 p-b-90">
+				<ul>	
+					<h3><li><a href="index.jsp">Home</a></li></h3>
+				</ul><br>
 				<form action="forgotProcess" class="login100-form validate-form flex-sb flex-w" method="POST">
 					<span class="login100-form-title p-b-51">
 						Forgot Password
@@ -34,7 +38,9 @@
 					
 					
 					<div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
-						<input class="input100" type="password" name="password" placeholder="New Password">
+						<input class="input100" type="password" name="password" placeholder="New Password"
+						pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+			            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters and no special characters">
 						<span class="focus-input100"></span>
 					</div>
 					

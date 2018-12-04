@@ -7,11 +7,16 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Product Page</title>
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/nav.css"/>">
 <style>
-.grid-container {
-display: grid;
-grid-template-columns: auto auto;
-}
+	.grid-container {
+	display: grid;
+	grid-template-columns: auto auto;
+	}
+	#div2{
+			margin-left: 200px;
+			margin-right: 200px;	
+		}
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>">
 </head>
@@ -30,37 +35,39 @@ grid-template-columns: auto auto;
         	response.setHeader("Expires", "0"); //Proxies
         
         %>
-
-	<div>
-		<h4 align="right">Hi, ${verify.uname}</h4>
-		<h4 align="right"><a href="../logout">Logout</a></h4>
-	</div>
-	<div class="grid-container">
+	<center>
+	<div id="div2" style = "height:100%;">
+	<ul>	
+		<li><a href="loginProcess">Hi, ${verify.uname}</a></li>
+		<li style="float:right"><a href="../logout">Logout</a></li>
+		<li style="float:right"><a href="changePassword">Change Password</a></li>
+	</ul>
+	</div></center>
+	<div class="grid-container" style="margin-left: 200px; margin-right: 200px;">
 	<div class="grid-item">
-    <img src="<c:url value="../${command1.image}"/>" style="width:200px;height:200px;"><br></div>
+    <img src="<c:url value="../${command1.image}"/>" style="width:250px;height:250px;"><br></div>
 	  <div class="grid-item">
-	  <h4><b>Product Name:<br> ${command1.productName}
-	   <br>
-	  Product Details:<br> ${command1.productDetails}  
-	   <br>
-	  Cost:<br> ${command1.cost}/-</b></h4>  
+	  <h4><b>Product Name:<br></b></h4> <h5>${command1.productName}</h5>
+	  <h4><b>Product Details:<br></b></h4> <h5>${command1.productDetails}</h5>  
+	  <h4><b>Cost:<br></b></h4> <h5>${command1.cost}/-</h5> 
 
-  <br> <br>
-	<b>Period:</b>
+  <br>
+	<b>EMI Period:</b>
 	<select onchange="val()" name="prd" id="prd" required>
+		<option disabled selected value> -- select an option -- </option>
 		<c:forEach var="p1" items="${command}">   
 			<option value=${p1.period}>
 			 ${p1.period} months
 			</option>
 		</c:forEach>
-	</select>
-	<h1 id= "demo"></h1>
+	</select><br>
+	<h3 id= "demo"></h3>
 	<form action="../purchase">
 		<input type="hidden" name="id" value=${verify.id}>
 		<input type="hidden" name="productId" value=${command1.productId}>
 		<input type="hidden" name="cost" value=${command1.cost}>
 		<input type="hidden" name="period" id="period">
-		<input type="submit" value="purchase">
+		<input type="submit" value="Purchase" class="btn btn-success">
 	</form>
 	</div>
 	</div>

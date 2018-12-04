@@ -5,8 +5,8 @@
 	pageEncoding="ISO-8859-1"%>
 
 <title>Registration</title>
-<link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/class.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/class.css"/>">
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/nav.css"/>">
 <style type="text/css">
 	.wrapper{max-width: 38em;
   	margin: 0em auto;}
@@ -28,6 +28,11 @@
 		<h1><a href="index.jsp" id="logo">Smart BIZ</a></h1>
 	</div>
   <div class="container">
+	<ul>	
+		<li><a href="index.jsp">Home</a></li>
+		<li><a href="admin">Admin</a></li>
+		<li><a href="terms">Terms And Conditions</a></li>
+	</ul>
     <form action="registerProcess" method="post">
       <div class="row">
       	<h1 align="center">Registration Form</h1>
@@ -68,7 +73,7 @@
         <div class="input-group input-group-icon">
           <input type="password" name="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters and no special characters"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             placeholder="Password" required />
           <div class="input-icon">
             <i class="fa fa-key"></i>

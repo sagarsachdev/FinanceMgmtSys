@@ -19,7 +19,7 @@
 		</div>
 		<nav>
 			<ul id="menu">
-				<li class="alpha" id="menu_active"><a href="index.html"><span><span>Home</span></span></a></li>
+				<li class="alpha" id="menu_active"><a href="index.jsp"><span><span>Home</span></span></a></li>
 				<li><a href="register"><span><span>Register</span></span> </a></li>
 				<li><a href="login"><span><span>Login</span></span></a></li>
 				<li><a href="admin"><span><span>Admin</span></span></a></li>
@@ -52,7 +52,7 @@
 	 16M colors
 	</li> <br>
 	<li><strong style="font-size: 18px">Size:</strong> 4.7 inches, 60.9 cm2 (~65.8% screen-to-body ratio)</li></ul>
-	<strong style="font-size: 18px"><br>COST:</strong> 32000/- 
+	<strong style="font-size: 18px"><br>COST :</strong> 32000/- 
 	<button style="margin-left: 15px"><a style="color:black" href="login">Buy Now</a></button>
 </div>
 	</div>

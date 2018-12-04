@@ -3,7 +3,6 @@ package com.finance.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +23,11 @@ import com.finance.service.CardService;
 import com.finance.service.PurchaseService;
 import com.finance.service.UserService;
 
+/**
+ * 
+ * @author Group 9
+ *
+ */
 @Controller
 public class LoginController {
   @Autowired
@@ -45,13 +49,9 @@ public class LoginController {
   @RequestMapping(value = "/login", method = RequestMethod.GET)
   public ModelAndView showLogin() {
     ModelAndView mav;
-	try {
 		mav = new ModelAndView("login");
 		mav.addObject("login", new Login());
-	} catch (Exception e) {
-		mav = new ModelAndView("error","message",e);
-	}
-    return mav;
+		return mav;
   }
   
   /**
@@ -61,13 +61,9 @@ public class LoginController {
   @RequestMapping(value = "/admin", method = RequestMethod.GET)
   public ModelAndView showAdminLogin() {
     ModelAndView mv;
-	try {
 		mv = new ModelAndView("adminlogin");
 		mv.addObject("admin", new Login());
-	} catch (Exception e) {
-		mv = new ModelAndView("error","message",e);
-	}
-    return mv;
+		return mv;
   }
   
   /**
@@ -78,7 +74,6 @@ public class LoginController {
   @RequestMapping(value = "/loginProcess", method = RequestMethod.POST)
   public ModelAndView loginProcess(@ModelAttribute("login") Login login, HttpServletRequest request) {
     ModelAndView mav;
-	try {
 		mav = null;
 		int cardValue = 0;
 		String password = MD5.getMd5(login.getPassword());
@@ -101,10 +96,7 @@ public class LoginController {
 		    mav = new ModelAndView("login");
 		    mav.addObject("message", "Username or Password is wrong!!");
 		}
-	} catch (Exception e) {
-		mav = new ModelAndView("error","message",e);
-	}
-    return mav;
+		return mav;
   }
   
   /**
@@ -115,15 +107,11 @@ public class LoginController {
   @RequestMapping("/logout")
   public ModelAndView logout(HttpServletRequest request) {
 	  ModelAndView mv;
-	try {
 		HttpSession session = request.getSession();
 		  session.removeAttribute("verify");
 		  session.invalidate();
 		  mv = new ModelAndView("login");
-	} catch (Exception e) {
-		mv = new ModelAndView("error","message",e);
-	}
-	  return mv;
+		  return mv;
   }
   
   /**
@@ -142,9 +130,8 @@ public class LoginController {
    */
   @RequestMapping(value = "/forgotProcess", method = RequestMethod.POST)
   public ModelAndView forgotProcess(@ModelAttribute Login login) {
-	  ModelAndView mv = null;
-	  try {
-		String password = MD5.getMd5(login.getPassword());
+	  	  ModelAndView mv = null;
+		  String password = MD5.getMd5(login.getPassword());
 		  login.setPassword(MD5.getMd5(password));
 		  int i = userService.update(login);
 		  if(i>0) {
@@ -154,9 +141,31 @@ public class LoginController {
 			  mv = new ModelAndView("forgot");
 			  mv.addObject("msg", "Username does not exist");
 		  }
-	} catch (Exception e) {
-		mv = new ModelAndView("error","message",e);
-	}
+		  return mv;
+  }
+  
+  @RequestMapping(value="/changePassword")
+  public ModelAndView changePassword() {
+	  ModelAndView mv = new ModelAndView("changepassword");
+	  return mv;
+  }
+
+  @RequestMapping(value="/changeProcess")
+  public ModelAndView changeProcess(HttpServletRequest request ,@ModelAttribute Login login) {
+	  ModelAndView mv = null;
+	  String password = MD5.getMd5(login.getPassword());
+	  login.setPassword(MD5.getMd5(password));
+	  HttpSession session = request.getSession();
+	  User user = (User)session.getAttribute("verify");
+	  login.setUname(user.getUname());
+	  int i = userService.update(login);
+	  if(i>0) {
+		  mv = new ModelAndView("login");
+		  mv.addObject("msg", "Password Successfully Changed");
+	  }else {
+		  mv = new ModelAndView("changePassword");
+		  mv.addObject("msg", "Couldn't change password");
+	  }
 	  return mv;
   }
   

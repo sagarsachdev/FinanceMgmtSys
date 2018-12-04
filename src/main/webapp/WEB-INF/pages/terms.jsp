@@ -9,25 +9,48 @@
 <title>Terms and Conditions</title>
 <style type="text/css">
 	ul li {list-style-type: disc;}
+	ol {
+    list-style-type: none;
+    border : 4px solid white;
+    overflow: hidden;
+    background-color: #333;
+	}
+	
+	ol li {
+	    float: left;
+	}
+	
+	ol li a {
+	    display: block;
+	    color: white;
+	    text-align: center;
+	    padding: 14px 16px;
+	    text-decoration: none;
+	}
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/main.css"/>">
 </head>
 <body>
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100 p-t-90 p-b-90">
+		
+			<div class="wrap-login100 p-t-90 p-b-90" style="width: 650px;">
+			<ol>	
+					<h3><li><a href="index.jsp">Home</a></li>
+					<li style="float: right;"><a href="login">Login</a></li>
+					<li style="float: right;"><a href="register">Register</a></li></h3>
+			</ol><br>
 			<div>
-				<h1>Eligibility and Documents Required</h1>
+				<h1>Eligibility and Documents Required</h1><br>
 				<ul>
 					<h4><li> Regular source of income.  </li>
 					 <li>Aadhar card and PAN card. </li>
 					<li> One cancelled cheque.  </li>
-					 <li>One passport size photograph. </li>
-					 <li>ECS mandate duly signed. </li></h4>
+					 <li>One passport size photograph. </li></h4>
 				</ul>
 			</div><br>
 			<div>
-			<h1>Terms and Conditions</h1>
+			<h1>Terms and Conditions</h1><br>
 			<ul>
 				<li> Joining fee for Gold EMI Card: Rs. 400. </li>
 				<li>Joining fee for Titanium EMI Card: Rs. 800 </li>

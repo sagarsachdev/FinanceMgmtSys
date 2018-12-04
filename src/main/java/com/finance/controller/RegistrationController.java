@@ -13,7 +13,7 @@ import com.finance.service.UserService;
 
 /**
  * 
- * @author SmartBiz
+ * @author Group 9
  *
  */
 @Controller
@@ -30,13 +30,9 @@ public class RegistrationController {
   @RequestMapping(value = "/register", method = RequestMethod.GET)
   public ModelAndView showRegister() {
     ModelAndView mav;
-	try {
 		mav = new ModelAndView("register");
 		mav.addObject("user", new User());
-	} catch (Exception e) {
-		mav = new ModelAndView("error","message",e);
-	}
-    return mav;
+		return mav;
   }
   
   /**
@@ -47,17 +43,13 @@ public class RegistrationController {
   @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
   public ModelAndView addUser(@ModelAttribute("user") User user) {
   ModelAndView mv;
-	try {
 		mv = new ModelAndView("login");
 		  int i = userService.register(user);
 		  int j = cardService.insertCard(user);
 		  if(i>0 && j>0) {
 		   mv.addObject("firstname", user.getName());
 		  }
-	} catch (Exception e) {
-		mv = new ModelAndView("error","message",e);
-	}
-  return mv;
+		  return mv;
   }
   
   /**
@@ -67,11 +59,7 @@ public class RegistrationController {
   @RequestMapping("/terms")
   public ModelAndView terms() {
 	  ModelAndView mv;
-		try {
 			mv = new ModelAndView("terms");
-		} catch (Exception e) {
-			mv = new ModelAndView("error","message",e);
-		}
-	  return mv;
+			return mv;
   }
 }
