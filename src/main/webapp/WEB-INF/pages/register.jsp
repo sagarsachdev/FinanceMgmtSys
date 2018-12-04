@@ -26,34 +26,34 @@
       	<h1 align="center">Registration Form</h1>
         <h4>User details</h4>
         <div class="input-group input-group-icon"> 
-          <input type="text" name="name" placeholder="Full Name" pattern="^[a-zA-Z]+$" maxlength="20" required />
+          <input type="text" name="name" placeholder="Full Name" pattern="^[a-zA-Z]+$" title="Only Character allowed, maximum 20 Characters" maxlength="20" required />
           <div class="input-icon">
             <i class="fas fa-users"></i>
           </div>
         </div>
         <div class="input-group input-group-icon">
           <input type="tel" name="phone" placeholder="Phone Number"
-            pattern="[789][0-9]{9}" name="phone" minlength="10" maxlength="10"
+            pattern="[789][0-9]{9}" name="phone" minlength="10" maxlength="10" title="Phone number should start from 7 or 8 or 9 and must be 10 digit"
             required />
           <div class="input-icon">
             <i class="fas fa-phone"></i>
           </div>
         </div>
         <div class="input-group input-group-icon">
-          <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Email Address" required />
+          <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="Sample : abc@def.com" placeholder="Email Address" required />
           <div class="input-icon">
             <i class="fa fa-envelope"></i>
           </div>
         </div>
         <div class="input-group input-group-icon">
-          <input type="textarea" name="address" placeholder="Address" pattern="^[a-zA-Z0-9]+$" maxlength="30" required />
+          <input type="textarea" name="address" placeholder="Address" title="Must be consist of only characters and digits and maximum character allowed are 30" pattern="^[a-zA-Z0-9]+$" maxlength="30" required />
           <div class="input-icon">
             <i class="fas fa-address-card"></i>
           </div>
         </div>
         <h4>User Credentials</h4>
         <div class="input-group input-group-icon">
-          <input type="text" name="uname" placeholder="Username" pattern="^[a-zA-Z0-9]+$" maxlength="10" required />
+          <input type="text" name="uname" placeholder="Username" title="should only contain characters and digits and maximum length is 10" pattern="^[a-zA-Z0-9]+$" maxlength="10" required />
           <div class="input-icon">
             <i class="fas fa-user"></i>
           </div>
@@ -61,7 +61,7 @@
         <div class="input-group input-group-icon">
           <input type="password" name="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters and no special characters"
             placeholder="Password" required />
           <div class="input-icon">
             <i class="fa fa-key"></i>
@@ -72,9 +72,9 @@
       <div class="row">
         <h4>Card Type</h4>
         <div class="input-group">
-          <input type="radio" id="payment-method-card" name="card" value="gold" checked="true" /> 
+          <input type="radio" id="payment-method-card" name="card" value="gold" title="Value is 40000" checked="true" /> 
           <label for="payment-method-card">Gold</label> 
-            <input type="radio" id="payment-method-paypal" name="card" value="titanium" /> 
+            <input type="radio" id="payment-method-paypal" name="card" title="Value is 80000" value="titanium" /> 
             <label for="payment-method-paypal">Titanium</label>
         </div>
       
@@ -91,7 +91,7 @@
         </div>
       </div>
         <div class="input-group input-group-icon">
-          <input type="tel" placeholder="Savings Account number"
+          <input type="tel" placeholder="Savings Account number" title="should only consist of digits and length should be between 11 and 15"
             name="accountNo" pattern="[0-9]{11,15}" required />
           <div class="input-icon">
             <i class="fas fa-piggy-bank"></i>
@@ -99,7 +99,7 @@
         </div>
         <div class="input-group input-group-icon">
           <input type="text" placeholder="IFSC code" pattern="^[A-Za-z]{4}\d{7}$" minlength="11"
-            maxlength="11" name="ifsc" required />
+            title="First four must be characters and remaining 7 should be digits" maxlength="11" name="ifsc" required />
           <div class="input-icon" >
             <i class="fas fa-qrcode"></i>
           </div>

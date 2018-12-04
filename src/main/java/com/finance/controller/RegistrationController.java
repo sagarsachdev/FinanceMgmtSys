@@ -20,14 +20,14 @@ public class RegistrationController {
   @Autowired
   public CardService cardService;
   @RequestMapping(value = "/register", method = RequestMethod.GET)
-  public ModelAndView showRegister(HttpServletRequest request, HttpServletResponse response) {
+  public ModelAndView showRegister() {
     ModelAndView mav = new ModelAndView("register");
     mav.addObject("user", new User());
     return mav;
   }
   
   @RequestMapping(value = "/registerProcess", method = RequestMethod.POST)
-  public ModelAndView addUser(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("user") User user) {
+  public ModelAndView addUser(@ModelAttribute("user") User user) {
   ModelAndView mv = new ModelAndView("login");
   int i = userService.register(user);
   int j = cardService.insertCard(user);
@@ -35,5 +35,11 @@ public class RegistrationController {
    mv.addObject("firstname", user.getName());
   }
   return mv;
+  }
+  
+  
+  @RequestMapping("/terms")
+  public ModelAndView terms() {
+	  return new ModelAndView("terms");
   }
 }

@@ -78,7 +78,7 @@
 			<h4>Card type : ${card.cardType}</h4>
 			<h4>Card Number : ${card.cardNo}</h4>
 			<h4>Validity : ${card.validity}</h4>
-			<h4>Total Credit :  ${card.value}</h4></center>
+			<h4>Total Credit :  ${cardValue}</h4></center>
 		</div>
 		<div>
 			<h4>Activated : ${verify.verified}</h4>

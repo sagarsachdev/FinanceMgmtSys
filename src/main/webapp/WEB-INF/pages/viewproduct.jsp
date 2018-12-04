@@ -14,9 +14,32 @@
 		margin-left: 200px;
 		margin-right: 200px;
 		}
+		#div2{
+			margin-left: 200px;
+			margin-right: 200px;	
+		}
+		 ul {
+	    list-style-type: none;
+	    border : 4px solid white;
+	    margin: 0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #333;
+		}
+		
+		li {
+		    float: left;
+		}
+		
+		li a {
+		    display: block;
+		    color: white;
+		    text-align: center;
+		    padding: 14px 16px;
+		    text-decoration: none;
+		}
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>">
-<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">	
 </head>
 <body style="background-color: #e3e3e3">
 
@@ -33,14 +56,15 @@
         	response.setHeader("Expires", "0"); //Proxies
         
         %>
-
-<div>
-<div>
-<h4 align="right">Hi, ${verify.uname}</h4>
-<h4 align="right"><a href="logout">Logout</a></h4>
-</div>
-
-</div>
+<center>
+<div id="div2" style = "height:100%;">
+	<ul>	
+		<li><a href="#">Hi, ${verify.uname}</a></li>
+		<li style="float:right"><a href="logout">Logout</a></li>
+		<li style="float:right"><a href="changePassword">Change Password</a></li>
+	</ul>
+	</div></center>
+	<div>
 <h1 align="center">Product List</h1> 
 <br>
  	<div class="grid-container">
@@ -49,12 +73,12 @@
     <img src="<c:url value="${Product.image}"/>"style="width:200px;height:200px;"><br>
     </div>
     <div class="grid-item">
-  		<b>Product Name:</b> ${Product.productName}  
+  	<br>	<b>Product Name:</b> ${Product.productName}  
    <br>
   		<b>Product Details:</b> ${Product.productDetails}  
    <br>
   		<b>Cost:</b> ${Product.cost}  
-       <br><br><form action="searchpro/${Product.productId}"><input type="Submit" value="Buy Now"><br><br><br></form>
+       <br><br><form action="searchpro/${Product.productId}"><input class="btn btn-success" type="Submit" value="Buy Now"><br><br><br></form>
        </div>
    </c:forEach>  
    </div>

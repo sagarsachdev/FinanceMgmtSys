@@ -23,7 +23,7 @@
 				<li><a href="register"><span><span>Register</span></span> </a></li>
 				<li><a href="login"><span><span>Login</span></span></a></li>
 				<li><a href="admin"><span><span>Admin</span></span></a></li>
-				<li class="omega"><a href="Terms.html"><span><span>T&C</span></span></a></li>
+				<li class="omega"><a href="terms"><span><span>T&C</span></span></a></li>
 			</ul>
 		</nav>
 	</header>
