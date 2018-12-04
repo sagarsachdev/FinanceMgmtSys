@@ -31,7 +31,7 @@
 	<ul>	
 		<li><a href="index.jsp">Home</a></li>
 		<li><a href="admin">Admin</a></li>
-		<li><a href="terms">Terms And Conditions</a></li>
+		<li style="float: right;"><a href="terms">Terms And Conditions</a></li>
 	</ul>
     <form action="registerProcess" method="post">
       <div class="row">

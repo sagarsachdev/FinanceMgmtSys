@@ -102,6 +102,34 @@ public class LoginController {
   /**
    * 
    * @param request : Uses request object to initiate the session
+   * @param u : Accepts Object Of logged-in user
+   * @return mv : It returns view after completing the process defined in method
+   */
+  @RequestMapping("/dashboard")
+  public ModelAndView dashboard(HttpServletRequest request,User u) {
+	    HttpSession session = request.getSession();
+	    ModelAndView mv = null;
+	    u = (User)session.getAttribute("verify");
+	    if(u!=null) {
+	    String uname = u.getUname();
+	    List<User> lst = adminService.getUsrByUname(uname);
+	    List<Card> card = cardService.getCardByName(uname);
+	    List<Purchase> purchase = purchaseService.getPurchaseById(lst.get(0).getId());
+	    int cardValue = lst.get(0).getCard().equals("gold") ? GOLD_VALUE : TITANIUM_VLAUE;
+	    mv = new ModelAndView("dashboard");
+	    mv.addObject("cardValue",cardValue);
+	    mv.addObject("purchaseList",purchase);
+	    mv.addObject("card",card.get(0));
+	    mv.addObject("verify",lst.get(0));
+	    }else {
+	    	mv = new ModelAndView("login");
+	    }
+	    return mv;
+  }
+  
+  /**
+   * 
+   * @param request : Uses request object to initiate the session
    * @return mv : It returns view after completing the process defined in method
    */
   @RequestMapping("/logout")

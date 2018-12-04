@@ -35,18 +35,10 @@
       		response.sendRedirect("login");
       	}
       %>
-        <%
-        	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-        
-        	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-        	
-        	response.setHeader("Expires", "0"); //Proxies
-        
-        %>
 <center>
 <div id="div2" style = "height:100%;">
 	<ul>	
-		<li><a href="loginProcess">Hi, ${verify.uname}</a></li>
+		<li><a href="dashboard">Hi, ${verify.uname}</a></li>
 		<li style="float:right"><a href="logout">Logout</a></li>
 		<li style="float:right"><a href="changePassword">Change Password</a></li>
 	</ul>

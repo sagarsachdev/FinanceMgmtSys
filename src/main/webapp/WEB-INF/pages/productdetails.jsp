@@ -19,6 +19,12 @@
 		}
 </style>
 <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/bootstrap.css"/>">
+<script type="text/javascript">
+		history.pushState(null,null,location.href);
+		window.onpopstate = function(){
+			history.go(1);
+		};
+	</script>
 </head>
 <body style="background-color: #e3e3e3">
 
@@ -27,20 +33,13 @@
       		response.sendRedirect("../login");
       	}
       %>
-        <%
-        	response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); //HTTP 1.1
-        
-        	response.setHeader("Pragma", "no-cache"); //HTTP 1.0
-        	
-        	response.setHeader("Expires", "0"); //Proxies
-        
-        %>
 	<center>
 	<div id="div2" style = "height:100%;">
 	<ul>	
-		<li><a href="loginProcess">Hi, ${verify.uname}</a></li>
+		<li><a href="../dashboard">Hi, ${verify.uname}</a></li>
+		<li><a href="../viewproduct1">Products</a></li>
 		<li style="float:right"><a href="../logout">Logout</a></li>
-		<li style="float:right"><a href="changePassword">Change Password</a></li>
+		<li style="float:right"><a href="../changePassword">Change Password</a></li>
 	</ul>
 	</div></center>
 	<div class="grid-container" style="margin-left: 200px; margin-right: 200px;">
