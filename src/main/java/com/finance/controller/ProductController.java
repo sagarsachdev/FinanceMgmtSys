@@ -82,7 +82,7 @@ public class ProductController {
 		try {
 			p.setPeriod(Integer.parseInt(request.getParameter("period")));
 		} catch (NumberFormatException e) {
-			mv = new ModelAndView("error","message",e);
+			return new ModelAndView("error","message","You haven't selected proper month for EMI period!");
 		}
 		p.setProductId(Integer.parseInt(request.getParameter("productId")));
 		p.setCost(Float.parseFloat(request.getParameter("cost")));

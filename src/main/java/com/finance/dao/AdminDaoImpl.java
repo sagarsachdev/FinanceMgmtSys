@@ -28,7 +28,8 @@ public class AdminDaoImpl implements AdminDao {
 		}
 	
 	/**
-	 @return list:The list of all the users registered
+	 * This method 
+	 * @return list:The list of all the users registered
 	 */
 	public List<User> getAllUsers(){  
 		 return jdbcTemplate.query("select * from gr1_users",new ResultSetExtractor<List<User>>(){  

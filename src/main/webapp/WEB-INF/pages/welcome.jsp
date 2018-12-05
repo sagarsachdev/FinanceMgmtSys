@@ -71,7 +71,7 @@
 		</div>
 		
 		<div>
-		<c:if test="${requestScope.purchaseList !=null and
+	<c:if test="${requestScope.purchaseList !=null and
 	 	not empty requestScope.purchaseList}">
 	 	<h3>Purchase History</h3>
 		<table border="2" cellpadding="5">  

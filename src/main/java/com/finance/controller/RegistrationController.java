@@ -31,7 +31,6 @@ public class RegistrationController {
   public ModelAndView showRegister() {
     ModelAndView mav;
 		mav = new ModelAndView("register");
-		mav.addObject("user", new User());
 		return mav;
   }
   

@@ -5,6 +5,7 @@
 
 <html>
    <head>
+   <meta http-equiv="Refresh" content="5;url=dashboard">
    		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
       <title>Show Error Page</title>
       <style type="text/css">
@@ -24,7 +25,9 @@
 
       <h1 style="color: red;"><i class="fas fa-frown"></i> Ooooopps...</h1>
       <h3>An Error Occured</h3>
-      		<table width = "100%" border = "1" cellpadding="4">
+      		<h2>${message}</h2>
+      		
+      		<%-- <table width = "100%" border = "1" cellpadding="4">
       			<tr>
       				<th>Error : </th>
       				<td>${message}</td>
@@ -38,7 +41,7 @@
             			</c:forEach>
             		</td>
       			</tr>
-      		</table>
+      		</table> --%>
   			
    </body>
 </html>

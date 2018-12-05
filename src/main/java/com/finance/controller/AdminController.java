@@ -15,23 +15,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finance.dao.AdminDao;
 import com.finance.model.Login;
 import com.finance.model.User;
+import com.finance.service.AdminService;
 
 /**
  * 
- * @author Group 9
+ * @author Group 1
  *
  */
 @Controller
 public class AdminController {
 	@Autowired
-	AdminDao adao;
+	AdminService adminService;
 	private int value;
+	static final String USERNAME = "admin";
+	static final String PASSWORD = "admin";
 
 	/**
-	 * 
+	 * This method is used for logging in the admin
 	 * @param request : It is used to set some attribute
 	 * @param l : It is object of Login POJO class
 	 * @return mv : It returns view after completing the process defined in method
@@ -42,9 +44,9 @@ public class AdminController {
 	@RequestMapping(value="/adminloginProcess", method = RequestMethod.POST)
 	public ModelAndView adminloginProcess(HttpServletRequest request, @ModelAttribute Login l) throws ServerException,IOException, ServletException {
 		ModelAndView mv = null;
-			if(l.getUname().equals("admin") && l.getPassword().equals("admin")) {
+			if(l.getUname().equals(USERNAME) && l.getPassword().equals(PASSWORD)) {
 				List<User> lst = new ArrayList<User>();
-				lst = adao.getAllUsers();
+				lst = adminService.getAllUsers();
 				request.setAttribute("usrList",lst);
 				mv = new ModelAndView("userinfo");
 			}else {
@@ -55,7 +57,7 @@ public class AdminController {
 	}
 
 	/**
-	 * 
+	 * This method is used for displaying all the users registered
 	 * @param request : It is used to set some attribute
 	 * @return : It returns view after completing the process defined in method
 	 */
@@ -63,14 +65,14 @@ public class AdminController {
 	public ModelAndView display(HttpServletRequest request) {
 		ModelAndView mv;
 			List<User> lst = new ArrayList<User>();
-			lst = adao.getAllUsers();
+			lst = adminService.getAllUsers();
 			request.setAttribute("usrList",lst);
 			mv = new ModelAndView("userinfo");
 		return mv;
 	}
 
 	/**
-	 * 
+	 * This method is used to edit user's details such as verifying the user
 	 * @param id : Accepts userId to edit user's profile
 	 * @return : It returns view after completing the process defined in method
 	 */
@@ -80,13 +82,13 @@ public class AdminController {
 			User u = new User();
 			u.setId(id);
 			value = u.getId();
-			List<User> usr=adao.getUsrById(id);  
+			List<User> usr=adminService.getUsrById(id);  
 			mv = new ModelAndView("usreditform","command",usr.get(0));
 			return mv;
 	}  
 
 	/**
-	 * 
+	 * This method is used to save the changes made by admin
 	 * @param usr : Accepts user object to set attributes in POJO class
 	 * @return : It returns view after completing the process defined in method
 	 */
@@ -94,19 +96,19 @@ public class AdminController {
 	public ModelAndView editsave(@ModelAttribute("usr") User usr){  
 		ModelAndView mv;
 			usr.setId(value);
-			adao.updateUser(usr);  
+			adminService.updateUser(usr);  
 			mv = new ModelAndView("redirect:/userinfo"); 
 			return mv;
 	}  
 
-	/**
+	/** This method is used to delete some user by admin
 	 * @param id : Accepts userId in order to delete user's account
 	 * @return : It returns view after completing the process defined in method
 	 */
 	@RequestMapping(value="/deleteusr/{id}",method = RequestMethod.GET)  
 	public ModelAndView delete(@PathVariable int id){  
 		ModelAndView mv;
-			adao.delete(id);  
+			adminService.delete(id);  
 			mv = new ModelAndView("redirect:/userinfo");
 			return mv;
 	}  

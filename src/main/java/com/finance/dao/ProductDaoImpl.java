@@ -71,7 +71,7 @@ public List<Product> getCategoryProducts(int id){
 }
 
 /**
- * @param
+ * This method is used to retrieve the EMI period from database
  * @return p1:The list of all the Periods stored in the database.
  */
 public List<Period> getPeriod1(){  

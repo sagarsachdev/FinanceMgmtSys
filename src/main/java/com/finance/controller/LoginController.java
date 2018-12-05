@@ -200,6 +200,6 @@ public class LoginController {
   @RequestMapping("*")
   @ResponseBody
   public String fallbackMethod(){
-  	return "fallback method";
+  	return "Sorry! Mapping is not defined for this page";
   }
 }
