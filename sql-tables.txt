@@ -1,0 +1,96 @@
+CREATE TABLE  "GR1_CARD" 
+   (	"GC_CARD_NO" NUMBER, 
+	"GC_NAME" VARCHAR2(4000), 
+	"GC_CARD_TYPE" VARCHAR2(4000), 
+	"GC_VALIDITY" DATE NOT NULL ENABLE, 
+	"GC_VALUE" NUMBER, 
+	 CONSTRAINT "GR1_CARD_PK" PRIMARY KEY ("GC_CARD_NO") ENABLE
+   )
+/
+
+
+
+CREATE TABLE  "GR1_PRODUCTS" 
+   (	"GP_PRODUCT_ID" NUMBER, 
+	"GP_PRODUCT_NAME" VARCHAR2(4000), 
+	"GP_PRODUCT_DETAILS" VARCHAR2(4000), 
+	"GP_COST" NUMBER, 
+	"GP_IMAGES" VARCHAR2(4000), 
+	 CONSTRAINT "GR1_PRODUCTS_PK" PRIMARY KEY ("GP_PRODUCT_ID") ENABLE
+   )
+/
+
+
+
+
+CREATE TABLE  "GR1_PRODUCTS_DETAILS" 
+   (	"GPD_GU_U_ID" NUMBER(10,0), 
+	"GPD_GP_PRODUCT_ID" NUMBER(10,0), 
+	"GPD_BUYING_DATE" DATE, 
+	"GPD_PERIOD" NUMBER(10,0), 
+	"GPD_COST" NUMBER(10,0), 
+	 CONSTRAINT "FK_P_ID" FOREIGN KEY ("GPD_GP_PRODUCT_ID")
+	  REFERENCES  "GR1_PRODUCTS" ("GP_PRODUCT_ID") ENABLE
+   )
+/
+
+ALTER TABLE GR1_PRODUCTS_DETAILS ADD CONSTRAINT GP_FKCAN FOREIGN KEY (GPD_GU_U_ID) REFERENCES GR1_USERS(GU_U_ID) ON DELETE CASCADE;
+
+
+CREATE TABLE  "GR1_TENURE" 
+   (	"GT_PERIOD" NUMBER
+   )
+/
+
+insert into gr1_tenure values(3)
+insert into gr1_tenure values(6)
+insert into gr1_tenure values(9)
+insert into gr1_tenure values(12)
+
+
+CREATE TABLE  "GR1_USERS" 
+   (	"GU_U_ID" NUMBER, 
+	"GU_NAME" VARCHAR2(4000), 
+	"GU_PHONE" NUMBER, 
+	"GU_EMAIL" VARCHAR2(4000), 
+	"GU_ADDRESS" VARCHAR2(4000), 
+	"GU_UNAME" VARCHAR2(4000), 
+	"GU_PASSWORD" VARCHAR2(4000), 
+	"GU_CARD" VARCHAR2(4000), 
+	"GU_ACCOUNT_NO" NUMBER, 
+	"GU_BANK" VARCHAR2(4000), 
+	"GU_IFSC" VARCHAR2(4000), 
+	"GU_VERIFIED" VARCHAR2(4000), 
+	 CONSTRAINT "GR1_USERS_PK" PRIMARY KEY ("GU_U_ID") ENABLE, 
+	 CONSTRAINT "GR1_USERS_CON" UNIQUE ("GU_UNAME") ENABLE, 
+	 CONSTRAINT "GR1_USERS_CON1" UNIQUE ("GU_EMAIL", "GU_ACCOUNT_NO") ENABLE
+   )
+/
+
+CREATE OR REPLACE TRIGGER  "BI_GR1_USERS" 
+  before insert on "GR1_USERS"               
+  for each row  
+begin   
+    select "GR1_USERS_SEQ".nextval into :NEW.GU_U_ID from dual; 
+end; 
+
+/
+ALTER TRIGGER  "BI_GR1_USERS" ENABLE
+/
+
+
+
+
+
+Data
+
+
+
+Insert into gr1_products values (1,'IPhone 6','LED-backlit IPS LCD, capacitive touchscreen,16M colors. 4.7 inches, 60.9 cm2 (~65.8% screen-to-body ratio)',32000, 'resources/images/photo1.png');
+
+
+Insert into gr1_products values (2,'4 Star Frost Free Refrigerator','Maintains the correct temperature and humidity levels for freshness.Direct Cool technology: Saves maximum energy requires manual defrosting',26000, 'resources/images/photo2.png');
+
+
+Insert into gr1_products values (3,'Dell Inspiron 15 3542 Intel Core i5','RAM: 4GB. Display Size: 15.6 inches. Processor: Intel HD Graphics 4400',45000,'resources/images/photo3.png');
+
